@@ -4,58 +4,204 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payment UI</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+body{
+background:#00c805;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.app{
+width:390px;
+height:780px;
+background:#00c805;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+padding:20px;
+}
+
+/* top bar */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:22px;
+}
+
+.right{
+display:flex;
+gap:18px;
+align-items:center;
+}
+
+.profile{
+border:2px solid black;
+border-radius:50%;
+padding:5px 8px;
+font-size:18px;
+}
+
+/* amount */
+
+.amount{
+text-align:center;
+font-size:70px;
+font-weight:600;
+margin-top:40px;
+}
+
+/* keypad */
+
+.keypad{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:35px;
+text-align:center;
+font-size:28px;
+margin-top:40px;
+}
+
+.keypad button{
+background:none;
+color: black;
+border:none;
+font-size:28px;
+font-weight: bolder;
+cursor:pointer;
+}
+
+/* buttons */
+
+.actions{
+display:flex;
+gap:15px;
+margin-top:10px;
+}
+
+.actions button{
+color: black;
+fomt-weight: bold;
+flex:1;
+background:#05b305;
+border:none;
+padding:15px;
+border-radius:30px;
+font-size:18px;
+}
+
+/* pay */
+
+.pay{
+margin-top:10px;
+background:black;
+color:white;
+border:none;
+padding:18px;
+border-radius:30px;
+font-size:20px;
+}
+
+/* bottom nav */
+
+.nav{
+display:flex;
+justify-content:space-around;
+font-size:26px;
+margin-top:15px;
+}
+
+</style>
 </head>
+
 
 <body>
 
 <div class="app">
 
-    <div class="top-icons">
-        <div class="scan"></div>
-        <div class="profile"></div>
-    </div>
+<!-- top -->
+<div class="topbar">
+<div>⌗</div>
 
-    <div class="amount" id="amount">$0</div>
+<div class="right">
+<span>🔍</span>
+<div class="profile">👤</div>
+</div>
+</div>
 
-    <div class="currency">USD ▼</div>
+<!-- amount -->
+<div class="amount" id="amount">$0</div>
 
-    <div class="keypad">
+<!-- keypad -->
+<div class="keypad">
 
-        <button onclick="press(1)">1</button>
-        <button onclick="press(2)">2</button>
-        <button onclick="press(3)">3</button>
+<button onclick="press('1')">1</button>
+<button onclick="press('2')">2</button>
+<button onclick="press('3')">3</button>
 
-        <button onclick="press(4)">4</button>
-        <button onclick="press(5)">5</button>
-        <button onclick="press(6)">6</button>
+<button onclick="press('4')">4</button>
+<button onclick="press('5')">5</button>
+<button onclick="press('6')">6</button>
 
-        <button onclick="press(7)">7</button>
-        <button onclick="press(8)">8</button>
-        <button onclick="press(9)">9</button>
+<button onclick="press('7')">7</button>
+<button onclick="press('8')">8</button>
+<button onclick="press('9')">9</button>
 
-        <button onclick="press('.')">.</button>
-        <button onclick="press(0)">0</button>
-        <button onclick="del()">⌫</button>
-
-    </div>
-
-    <div class="actions">
-        <button class="request">Request</button>
-        <button class="pay">Pay</button>
-    </div>
-
-    <div class="bottom-nav">
-        <span>$2.5K</span>
-        <span>▢</span>
-        <span>$</span>
-        <span>🔍</span>
-        <span class="badge">13</span>
-    </div>
+<button onclick="press('.')">.</button>
+<button onclick="press('0')">0</button>
+<button onclick="back()">⌫</button>
 
 </div>
 
-<script src="script.js"></script>
+<!-- actions -->
+<div class="actions">
+<button>Pool</button>
+<button>Request</button>
+</div>
+
+<button class="pay">Pay</button>
+
+<!-- nav -->
+<div class="nav">
+<span>🏠</span>
+<span>$</span>
+<span>🕒</span>
+</div>
+
+</div>
+
+<script>
+
+let value = "";
+
+function press(num){
+value += num;
+update();
+}
+
+function back(){
+value = value.slice(0,-1);
+update();
+}
+
+function update(){
+document.getElementById("amount").innerText =
+"$" + (value || "0");
+}
+
+</script>
 
 </body>
 </html>
